@@ -24,12 +24,12 @@ docker run --restart unless-stopped \
    -v /srv/gitlab-runner/config:/etc/gitlab-runner \
    -v /srv/gitlab-runner/general/aws:/home/gitlab-runner/.aws \
    -v /srv/gitlab-runner/general/sonar/conf:/opt/sonar-scanner/conf \
-   -d --name runner superstienos/gitlabrunner
+   -d --name runner superstienos/aws-gitlabrunner
 ```
 
 Just like the base image, once the container is running start one specifically to register it:
 ```bash
-docker run --rm -t -i -v /srv/gitlab-runner/config:/etc/gitlab-runner superstienos/gitlabrunner register
+docker run --rm -t -i -v /srv/gitlab-runner/config:/etc/gitlab-runner superstienos/aws-gitlabrunner register
 ```
 
 # Multiple runners
@@ -42,6 +42,6 @@ docker run --restart unless-stopped \
    -v /srv/gitlab-runner/runner1:/etc/gitlab-runner \
    -v /srv/gitlab-runner/general/aws:/home/gitlab-runner/.aws \
    -v /srv/gitlab-runner/general/sonar/conf:/opt/sonar-scanner/conf \
-   -d --name runner superstienos/gitlabrunner
+   -d --name runner superstienos/aws-gitlabrunner
 ```
 make note of the first `-v`. You could just increase the number. This way they will all use the same aws credentials and sonar configuration but they would be distinct runners.
